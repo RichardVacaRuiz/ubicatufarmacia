@@ -12,6 +12,17 @@ const port = process.env.PORT || 5000;
 const cors=require('cors');
 app.use(cors());
 
+var whitelist = ['http://localhost:3000']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 
 const app = express();
 
@@ -23,8 +34,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json({ limit: '10mb' }));
-app.use('/user', userRouter);
-app.use('/room', roomRouter);
+app.use('/user',  cors(corsOptions),userRouter);
+app.use('/room', cors(corsOptions),roomRouter);
 app.use('/', (req, res) => res.json({ message: 'Welcome to our API' }));
 app.use((req, res) =>res.status(404).json({ success: false, message: 'Not Found' })); 
 
