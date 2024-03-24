@@ -20,13 +20,9 @@ app.use((req, res, next) => {
 
 app.use(express.json({ limit: '10mb' }));
 app.use('/user', userRouter);
-//<<<<<<< HEAD
-app.use('/room', roomRouter);
-//=======
 
-//>>>>>>> 22eab1b0cd4f718014695b1b68d352c082d2ecd0
-//app.use('/user', userRouter);
-//app.use('/room', roomRouter);
+app.use('/room', roomRouter);
+
 app.use('/', (req, res) => res.json({ message: 'Welcome to our API' }));
 app.use((req, res) =>res.status(404).json({ success: false, message: 'Not Found' })); 
 
