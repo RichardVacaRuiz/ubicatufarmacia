@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useValue } from '../../context/ContextProvider';
 import { getRooms } from '../../actions/room';
-import ReactMapGL, { Marker ,NavigationControl,GeolocateControl, Popup} from 'react-map-gl';
+import ReactMapGL, { Marker ,NavigationControl,GeolocateControl, Popup, Source, Layer, FullscreenControl} from 'react-map-gl';
 import Supercluster from 'supercluster';
 import { Avatar, Paper, Tooltip } from '@mui/material';
 import './cluster.css';
@@ -34,7 +34,9 @@ const ClusterMap = () => {
     const [zoom, setZoom]= useState(0);
 
     const [popupInfo, setPopupInfo] = useState(null);
-
+    
+   /*  const [start, setStart]= useEffect([-73, 42]);
+    const [end, setEnd]= useEffect([-73, 42]); */
 
     useEffect(()=>{
         getRooms(dispatch);
@@ -71,7 +73,16 @@ const ClusterMap = () => {
         }
       }, [mapRef?.current]);
 
+      /* useEffect (()=>{
+          getRoutes()
+      },[]);
 
+      const getRoutes = async ()=>{
+        const response =await fetch('https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${REACT_APP_MAP_TOKEN}');
+        const data = await response.json();
+        console.log(data);
+      
+      } */
 
     return (
     <ReactMapGL
@@ -176,7 +187,8 @@ const ClusterMap = () => {
       <NavigationControl position="bottom-right" />
       
       <Geocoder/>
-    
+       <FullscreenControl/>
+       <NavigationControl/>
 
     </ReactMapGL>
     );
