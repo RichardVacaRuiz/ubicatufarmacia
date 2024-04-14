@@ -124,9 +124,11 @@ const mapRef =useRef();
       
        
         {...viewState}
-        mapboxAccessToken='pk.eyJ1IjoicmljaGFyaXRvMjAyMyIsImEiOiJjbGdnaXlscm8wM3g0M2pwOGNsNjF2Y2ZuIn0.CeG7R_Yz3Hzl95f6n4z5XA'
+        mapboxAccessToken={process.env.REACT_APP_MAP_TOKEN}
+       //mapboxAccessToken='pk.eyJ1IjoicmljaGFyaXRvMjAyMyIsImEiOiJjbGdnaXlscm8wM3g0M2pwOGNsNjF2Y2ZuIn0.CeG7R_Yz3Hzl95f6n4z5XA'
         onMove={evt =>setViewState(evt.viewState)}
-        mapStyle='mapbox://styles/richarito2023/clgg1j9ml00ai01mrovea6fua'
+        mapStyle={process.env.REACT_APP_MAP_STILES}
+       // mapStyle='mapbox://styles/richarito2023/clgg1j9ml00ai01mrovea6fua'
         onClick={handleClick}
       >
         <Source id="routeSource" type='geojson' data={geojson}>
